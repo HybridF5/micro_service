@@ -16,7 +16,8 @@ RUN yum -y install \
 	python-repoze-lru  \
 	crudini \
 	yum-utils \
-        python-osprofiler
+        python-osprofiler \
+        python-cinderclient
 
 # This pulls in all the dependencies of the python-nova package
 # without actually installing python-nova (because now the dependencies of
