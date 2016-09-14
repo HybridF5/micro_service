@@ -79,91 +79,91 @@ export OS_AUTH_URL=${OS_AUTH_URL:-http://${KEYSTONE_HOST}:35357/v2.0}
 
 # update jacket.conf
 CONFIG_FILE=/etc/jacket/jacket.conf
-crudini $CONFIG_FILE database connection "mysql+pymysql://${JACKET_DB_USER}:${JACKET_DB_PASS}@${MYSQL_HOST}:${MYSQL_PORT}/${JACKET_DB_NAME}"
-crudini $CONFIG_FILE database retry_interval 10
-crudini $CONFIG_FILE database idle_timeout 3600
-crudini $CONFIG_FILE database min_pool_size 1
-crudini $CONFIG_FILE database max_pool_size 10
-crudini $CONFIG_FILE database max_retries 100
-crudini $CONFIG_FILE database pool_timeout 10
+crudini --set $CONFIG_FILE database connection "mysql+pymysql://${JACKET_DB_USER}:${JACKET_DB_PASS}@${MYSQL_HOST}:${MYSQL_PORT}/${JACKET_DB_NAME}"
+crudini --set $CONFIG_FILE database retry_interval 10
+crudini --set $CONFIG_FILE database idle_timeout 3600
+crudini --set $CONFIG_FILE database min_pool_size 1
+crudini --set $CONFIG_FILE database max_pool_size 10
+crudini --set $CONFIG_FILE database max_retries 100
+crudini --set $CONFIG_FILE database pool_timeout 10
 
 # api database
-crudini $CONFIG_FILE api_database connection "mysql+pymysql://${JACKET_DB_USER}:${JACKET_DB_PASS}@${MYSQL_HOST}:${MYSQL_PORT}/${JACKET_API_DB_NAME}"
-crudini $CONFIG_FILE api_database retry_interval 10
-crudini $CONFIG_FILE api_database idle_timeout 3600
-crudini $CONFIG_FILE api_database min_pool_size 1
-crudini $CONFIG_FILE api_database max_pool_size 10
-crudini $CONFIG_FILE api_database max_retries 100
-crudini $CONFIG_FILE api_database pool_timeout 10
+crudini --set $CONFIG_FILE api_database connection "mysql+pymysql://${JACKET_DB_USER}:${JACKET_DB_PASS}@${MYSQL_HOST}:${MYSQL_PORT}/${JACKET_API_DB_NAME}"
+crudini --set $CONFIG_FILE api_database retry_interval 10
+crudini --set $CONFIG_FILE api_database idle_timeout 3600
+crudini --set $CONFIG_FILE api_database min_pool_size 1
+crudini --set $CONFIG_FILE api_database max_pool_size 10
+crudini --set $CONFIG_FILE api_database max_retries 100
+crudini --set $CONFIG_FILE api_database pool_timeout 10
 
-crudini $CONFIG_FILE keystone_authtoken auth_uri http://$KEYSTONE_HOST:5000
-crudini $CONFIG_FILE keystone_authtoken auth_url http://$KEYSTONE_HOST:35357
-crudini $CONFIG_FILE keystone_authtoken auth_type password
-crudini $CONFIG_FILE keystone_authtoken project_domain_name $KEYSTONE_DOMAIN
-crudini $CONFIG_FILE keystone_authtoken user_domain_name $KEYSTONE_DOMAIN
-crudini $CONFIG_FILE keystone_authtoken project_name $KEYSTONE_DOMAIN
-crudini $CONFIG_FILE keystone_authtoken username $JACKET_USERNAME
-crudini $CONFIG_FILE keystone_authtoken password $JACKET_PASSWORD
-#crudini $CONFIG_FILE keystone_authtoken memcached_servers $KEYSTONE_HOST:11211
+crudini --set $CONFIG_FILE keystone_authtoken auth_uri http://$KEYSTONE_HOST:5000
+crudini --set $CONFIG_FILE keystone_authtoken auth_url http://$KEYSTONE_HOST:35357
+crudini --set $CONFIG_FILE keystone_authtoken auth_type password
+crudini --set $CONFIG_FILE keystone_authtoken project_domain_name $KEYSTONE_DOMAIN
+crudini --set $CONFIG_FILE keystone_authtoken user_domain_name $KEYSTONE_DOMAIN
+crudini --set $CONFIG_FILE keystone_authtoken project_name $KEYSTONE_DOMAIN
+crudini --set $CONFIG_FILE keystone_authtoken username $JACKET_USERNAME
+crudini --set $CONFIG_FILE keystone_authtoken password $JACKET_PASSWORD
+#crudini --set $CONFIG_FILE keystone_authtoken memcached_servers $KEYSTONE_HOST:11211
 
-crudini $CONFIG_FILE DEFAULT osapi_jacket_listen "${JACKET_HOST}"
-crudini $CONFIG_FILE DEFAULT osapi_compute_listen "${JACKET_HOST}"
-crudini $CONFIG_FILE DEFAULT metadata_listen "${JACKET_HOST}"
-crudini $CONFIG_FILE DEFAULT osapi_volume_listen "${JACKET_HOST}"
-crudini $CONFIG_FILE DEFAULT debug "true"
-crudini $CONFIG_FILE DEFAULT log_dir "/var/log/jacket"
-crudini $CONFIG_FILE wsgi api_paste_config "/etc/jacket/jacket-api-paste.ini"
-crudini $CONFIG_FILE DEFAULT image_service jacket.compute.image.glance.GlanceImageService
+crudini --set $CONFIG_FILE DEFAULT osapi_jacket_listen "${JACKET_HOST}"
+crudini --set $CONFIG_FILE DEFAULT osapi_compute_listen "${JACKET_HOST}"
+crudini --set $CONFIG_FILE DEFAULT metadata_listen "${JACKET_HOST}"
+crudini --set $CONFIG_FILE DEFAULT osapi_volume_listen "${JACKET_HOST}"
+crudini --set $CONFIG_FILE DEFAULT debug "true"
+crudini --set $CONFIG_FILE DEFAULT log_dir "/var/log/jacket"
+crudini --set $CONFIG_FILE wsgi api_paste_config "/etc/jacket/jacket-api-paste.ini"
+crudini --set $CONFIG_FILE DEFAULT image_service jacket.compute.image.glance.GlanceImageService
 
-crudini $CONFIG_FILE DEFAULT rpc_backend rabbit
-crudini $CONFIG_FILE oslo_messaging_rabbit rabbit_host $RABBITMQ_HOST
-crudini $CONFIG_FILE oslo_messaging_rabbit rabbit_password $RABBITMQ_PASSWORD
-crudini $CONFIG_FILE oslo_messaging_rabbit rabbit_userid $RABBITMQ_USER
-crudini $CONFIG_FILE oslo_messaging_rabbit rabbit_port 5672
-crudini $CONFIG_FILE oslo_messaging_rabbit rabbit_use_ssl false
-#crudini $CONFIG_FILE oslo_messaging_rabbit rabbit_virtual_host /
-crudini $CONFIG_FILE oslo_messaging_rabbit rabbit_max_retries 0
-crudini $CONFIG_FILE oslo_messaging_rabbit rabbit_retry_interval 1
-crudini $CONFIG_FILE oslo_messaging_rabbit rabbit_ha_queues false
+crudini --set $CONFIG_FILE DEFAULT rpc_backend rabbit
+crudini --set $CONFIG_FILE oslo_messaging_rabbit rabbit_host $RABBITMQ_HOST
+crudini --set $CONFIG_FILE oslo_messaging_rabbit rabbit_password $RABBITMQ_PASSWORD
+crudini --set $CONFIG_FILE oslo_messaging_rabbit rabbit_userid $RABBITMQ_USER
+crudini --set $CONFIG_FILE oslo_messaging_rabbit rabbit_port 5672
+crudini --set $CONFIG_FILE oslo_messaging_rabbit rabbit_use_ssl false
+#crudini --set $CONFIG_FILE oslo_messaging_rabbit rabbit_virtual_host /
+crudini --set $CONFIG_FILE oslo_messaging_rabbit rabbit_max_retries 0
+crudini --set $CONFIG_FILE oslo_messaging_rabbit rabbit_retry_interval 1
+crudini --set $CONFIG_FILE oslo_messaging_rabbit rabbit_ha_queues false
 
 #compute
-crudini $CONFIG_FILE DEFAULT compute_driver libvirt.LibvirtDriver
-crudini $CONFIG_FILE DEFAULT firewall_driver jacket.compute.virt.firewall.NoopFirewallDriver
-crudini $CONFIG_FILE DEFAULT rootwrap_config /etc/jacket/rootwrap.conf
-crudini $CONFIG_FILE DEFAULT compute_topic "jacket-worker"
-crudini $CONFIG_FILE DEFAULT volume_topic "jacket-worker"
-crudini $CONFIG_FILE DEFAULT use_local true
-crudini $CONFIG_FILE DEFAULT instances_path ${INSTANCES_PATH}
-#crudini $CONFIG_FILE libvirt virt_type qemu
+crudini --set $CONFIG_FILE DEFAULT compute_driver libvirt.LibvirtDriver
+crudini --set $CONFIG_FILE DEFAULT firewall_driver jacket.compute.virt.firewall.NoopFirewallDriver
+crudini --set $CONFIG_FILE DEFAULT rootwrap_config /etc/jacket/rootwrap.conf
+crudini --set $CONFIG_FILE DEFAULT compute_topic "jacket-worker"
+crudini --set $CONFIG_FILE DEFAULT volume_topic "jacket-worker"
+crudini --set $CONFIG_FILE DEFAULT use_local true
+crudini --set $CONFIG_FILE DEFAULT instances_path ${INSTANCES_PATH}
+#crudini --set $CONFIG_FILE libvirt virt_type qemu
 
 # storage
 backend="lvm"
-crudini $CONFIG_FILE DEFAULT enabled_backends ${backend}
-crudini $CONFIG_FILE ${backend} lvm_type "default"
-crudini $CONFIG_FILE ${backend} iscsi_helper "tgtadm"
-crudini $CONFIG_FILE ${backend} volume_driver jacket.storage.volume.drivers.lvm.LVMVolumeDriver
-crudini $CONFIG_FILE ${backend} volume_group cinder-volumes
-crudini $CONFIG_FILE ${backend} volumes_dir /var/lib/cinder/volumes
-crudini $CONFIG_FILE ${backend} volume_backend_name lvm
+crudini --set $CONFIG_FILE DEFAULT enabled_backends ${backend}
+crudini --set $CONFIG_FILE ${backend} lvm_type "default"
+crudini --set $CONFIG_FILE ${backend} iscsi_helper "tgtadm"
+crudini --set $CONFIG_FILE ${backend} volume_driver jacket.storage.volume.drivers.lvm.LVMVolumeDriver
+crudini --set $CONFIG_FILE ${backend} volume_group cinder-volumes
+crudini --set $CONFIG_FILE ${backend} volumes_dir /var/lib/cinder/volumes
+crudini --set $CONFIG_FILE ${backend} volume_backend_name lvm
 
 #neutron
 neutron="neutron"
-crudini $CONFIG_FILE DEFAULT use_neutron "True"
-crudini $CONFIG_FILE neutron url "http://$NEUTRON_HOST:9696"
-crudini $CONFIG_FILE neutron neutron_default_tenant_id default
-crudini $CONFIG_FILE neutron auth_type password
-crudini $CONFIG_FILE neutron auth_section keystone_authtoken
-crudini $CONFIG_FILE neutron auth_url "http://$KEYSTONE_HOST:35357"
-crudini $CONFIG_FILE neutron project_domain_name $KEYSTONE_DOMAIN
-crudini $CONFIG_FILE neutron user_domain_name $KEYSTONE_DOMAIN
-crudini $CONFIG_FILE neutron region_name $ENDPOINT_REGION
-crudini $CONFIG_FILE neutron project_name service
-crudini $CONFIG_FILE neutron username $NEUTRON_USER_NAME
-crudini $CONFIG_FILE neutron password $NEUTRON_PASSWORD
-crudini $CONFIG_FILE neutron service_metadata_proxy True
-crudini $CONFIG_FILE neutron metadata_proxy_shared_secret $METADATA_SHARED_SECRET
-crudini $CONFIG_FILE DEFAULT linuxnet_ovs_integration_bridge br-int
-crudini $CONFIG_FILE neutron ovs_bridge br-int
+crudini --set $CONFIG_FILE DEFAULT use_neutron "True"
+crudini --set $CONFIG_FILE neutron url "http://$NEUTRON_HOST:9696"
+crudini --set $CONFIG_FILE neutron neutron_default_tenant_id default
+crudini --set $CONFIG_FILE neutron auth_type password
+crudini --set $CONFIG_FILE neutron auth_section keystone_authtoken
+crudini --set $CONFIG_FILE neutron auth_url "http://$KEYSTONE_HOST:35357"
+crudini --set $CONFIG_FILE neutron project_domain_name $KEYSTONE_DOMAIN
+crudini --set $CONFIG_FILE neutron user_domain_name $KEYSTONE_DOMAIN
+crudini --set $CONFIG_FILE neutron region_name $ENDPOINT_REGION
+crudini --set $CONFIG_FILE neutron project_name service
+crudini --set $CONFIG_FILE neutron username $NEUTRON_USER_NAME
+crudini --set $CONFIG_FILE neutron password $NEUTRON_PASSWORD
+crudini --set $CONFIG_FILE neutron service_metadata_proxy True
+crudini --set $CONFIG_FILE neutron metadata_proxy_shared_secret $METADATA_SHARED_SECRET
+crudini --set $CONFIG_FILE DEFAULT linuxnet_ovs_integration_bridge br-int
+crudini --set $CONFIG_FILE neutron ovs_bridge br-int
 
 mkdir -p /var/log/jacket
 
