@@ -165,10 +165,11 @@ crudini $CONFIG_FILE neutron metadata_proxy_shared_secret $METADATA_SHARED_SECRE
 crudini $CONFIG_FILE DEFAULT linuxnet_ovs_integration_bridge br-int
 crudini $CONFIG_FILE neutron ovs_bridge br-int
 
-# sync the database
-#jacket-manage db sync
-
 mkdir -p /var/log/jacket
+
+# sync the database
+jacket-manage db sync
+jacket-manage db_api sync
 
 # create a admin-openrc.sh file
 ADMIN_OPENRC=/root/admin-openrc.sh
